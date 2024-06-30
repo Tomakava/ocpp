@@ -577,7 +577,10 @@ class ChargePoint(cp):
         if feature_list[0] == "":
             _LOGGER.warning("No feature profiles detected, defaulting to Core")
             await self.notify_ha("No feature profiles detected, defaulting to Core")
-            feature_list = [om.feature_profile_core.value]
+            feature_list = (
+                "Core,FirmwareManagement,LocalAuthListManagement,"
+                "Reservation,SmartCharging,RemoteTrigger"
+            ).split(",")
         if self.central.config.get(
             CONF_FORCE_SMART_CHARGING, DEFAULT_FORCE_SMART_CHARGING
         ):
