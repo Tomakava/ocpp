@@ -1295,9 +1295,9 @@ class ChargePoint(cp):
                             self._metrics[measurand].value = value
                             self._metrics[measurand].unit = unit
                     elif unit == DEFAULT_ENERGY_UNIT:
-                        if transaction_matches:
-                            self._metrics[measurand].value = value / 1000
-                            self._metrics[measurand].unit = HA_ENERGY_UNIT
+
+                        self._metrics[measurand].value = value / 1000
+                        self._metrics[measurand].unit = HA_ENERGY_UNIT
                     else:
                         self._metrics[measurand].value = value
                         self._metrics[measurand].unit = unit
