@@ -801,7 +801,7 @@ class ChargePoint(cp):
 
         req = call.ChangeAvailability(connector_id=0, type=typ)
         resp = await self.call(req)
-        if resp.status == AvailabilityStatus.accepted:
+        if resp.status == AvailabilityStatus.accepted or resp.status == AvailabilityStatus.scheduled:
             return True
         else:
             _LOGGER.warning("Failed with response: %s", resp.status)
