@@ -107,6 +107,11 @@ match transactions and it won't report some meter values such as session time.
 
 ## [Mennekes Amtron Charge Control](https://www.mennekes.de/emobility/produkte/charge-control/)
 
+## [Morek Smart AC Charger](https://ev.morek.eu/products-morek-quick-charge-11-22-kw/)
+At least firmware version *A0-MEV-V2.0.9* is necessary for successful connection.
+
+Charger idle sampling interval is not supported and must be set to 0 to avoid warning that ClockAlignedDataInterval is read-only.
+
 ## [Simpson & Partners](https://simpson-partners.com/home-ev-charger/)
 All basic functions work properly
 
