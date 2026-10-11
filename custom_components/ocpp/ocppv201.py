@@ -1241,6 +1241,8 @@ class ChargePoint(cp):
     @on(Action.boot_notification)
     def on_boot_notification(self, charging_station, reason, **kwargs):
         """Perform OCPP callback."""
+        if reason != "Triggered":
+            self.rebooted_since_start = True
         resp = call_result.BootNotification(
             current_time=datetime.now(tz=UTC).isoformat(),
             interval=10,
