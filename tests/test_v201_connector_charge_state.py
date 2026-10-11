@@ -1846,3 +1846,16 @@ async def test_a_failing_hook_cannot_break_transaction_events(hass, caplog):
     assert cp._metrics[(1, csess.transaction_id)].value == ""
     assert cp._tx_event_state["U"] == {"seq": 1, "ended": True}
     assert caplog.text.count("session hook failed") == 4
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("reason", "rebooted"), [("Triggered", False), ("PowerUp", True)]
+)
+async def test_only_a_real_boot_counts_as_a_reboot(hass, reason, rebooted):
+    """A triggered BootNotification leaves the charger's transactions in place."""
+    cp = _mk_cp(hass)
+    assert cp.rebooted_since_start is False
+    cp.on_boot_notification({}, reason)
+    await hass.async_block_till_done()
+    assert cp.rebooted_since_start is rebooted
